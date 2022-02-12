@@ -1,8 +1,30 @@
 export default {
-    port: process.env.PORT,
+    port: process.env.PORT || 5000,
     dbUri: process.env.DB_CONNECTION,
-    accessTokenPrivateKey: process.env.ACCESS_TOKEN_PRIVATE_KEY,
-    accessTokenPublicKey: process.env.ACCESS_TOKEN_PUBLIC_KEY,
-    refreshTokenPrivateKey: process.env.REFRESH_PRIVATE_KEY,
-    refreshTokenPublicKey: process.env.REFRESH_PUBLIC_KEY,
+    accessTokenPrivateKey: `-----BEGIN RSA PRIVATE KEY-----
+MIICXgIBAAKBgQDT7teFaR94ujTLkkMRq/ECNnfFuxqt6qFFR69lNaZAUB8Hw/k5
+mE5w2YNdJb8YHHCfMZvH6TYukvgDh/EVyV2kB/+d0MHw7YE3FBEofuzYfcfoArae
+JCcxJtOAu+8QvQBrPd9NpwvzU2RsRl8UHK8moOj47eMunGxsjC/7qM1mzwIDAQAB
+AoGAHaxbULqfRXAM5FPeQCMq43xs2KqR2bf4TJL0497XIDoXnia6Rm4kzXgnBGu8
+jcutmRyBC0SD6ZF6WEQ4ZSyEh6m8+aNCoKyfzCXhk24Aj3+A1CHET70TQN89s1KS
+ShMzRHODlzlmsmP56hSSsZu58+C8T0xcMr+8VZYgdRk4UMECQQDp1X+eWz6MSohI
+1NAHrqUfLy69i5v4L8B2WkuAzN/F4LhRhM2wd8T7OakEOEIpSLogW7iyMKiL60L9
+aHqV6NljAkEA6AXd6Ux5Q4Qbxpy6PDWQ4n5JJ+rpIrt1h6tauC/mRDLnLxYghXqh
+qNeRFSg1wt5J1SLJszrrD2oGcrY6f6iupQJBAJTaIuY0oWl/HKh4SIFLbLOgPnnM
+wJnKFBODQWMZiC2X8t1509JNO+jM+MnF4mATeuCUYsuT7Ac92SQleTuqwY8CQQDD
+nE6eZc7GURZpt7B7Gl3v1bAvayjqE0je/GQbbKahUJj/ZZQ9dEneYv7561CH3Yg5
+nH6YEFAkSqrtAx0Gi1vRAkEAnrZXpwCz4xrXL5bGLOt3sDs5LQI2wEbm33/YYlrE
+D7x8kcg9A/7z4EFMuqES7f/BD2z+1D05v3me8QXKIKNGlQ==
+-----END RSA PRIVATE KEY-----`,
+    accessTokenPublicKey: `-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDT7teFaR94ujTLkkMRq/ECNnfF
+uxqt6qFFR69lNaZAUB8Hw/k5mE5w2YNdJb8YHHCfMZvH6TYukvgDh/EVyV2kB/+d
+0MHw7YE3FBEofuzYfcfoAraeJCcxJtOAu+8QvQBrPd9NpwvzU2RsRl8UHK8moOj4
+7eMunGxsjC/7qM1mzwIDAQAB
+-----END PUBLIC KEY-----`,
+    refreshTokenPrivateKey: '',
+    refreshTokenPublicKey: '',
+    saltWorkFactor: 10,
+    accessTokenTtl: "15m",
+    refreshTokenTtl: "1y",
 }
