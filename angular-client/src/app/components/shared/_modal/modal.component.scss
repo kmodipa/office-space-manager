@@ -1,0 +1,141 @@
+﻿@use "../../../../assets/scss/variables";
+@use "../../../../assets/scss/page-size-mixin";
+
+/* Mobile Styles */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.modal-header-row {
+  color: var(--default-text-color);
+  padding: 0;
+  font-family: 'Roboto Medium';
+  margin-bottom: 20px;
+
+  .start-at-first-block {
+    font-size: 1.3em;
+    grid-column: 1/8;
+  }
+
+  .start-at-second-block {
+    font-size: 1.1em;
+    grid-column: 2/8;
+  }
+
+  .start-at-second-block-to-end {
+    font-size: 17px;
+    grid-column: 2/9;
+  }
+
+  .back {
+    cursor: pointer;
+  }
+
+  .icon-1 {
+    grid-column: 1/2;
+  }
+
+  .icon-2 {
+    grid-column: 8/9;
+  }
+
+  img {
+    width: 25px;
+    height: 20px;
+    display: inline;
+    vertical-align:middle;
+  }
+}
+
+.modal-body {
+  color: var(--default-text-color);
+  font-weight: 200;
+  box-sizing: border-box;
+
+  .generic-button, .generic-button-inverted, .delete-button {
+    grid-column: 1/9;
+    justify-self: center;
+  }
+}
+
+
+jw-modal {
+    /* modals are hidden by default */
+    display: none;
+
+    .jw-modal {
+        /* modal container fixed across whole screen */
+
+        max-width: 700px;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        /* z-index must be higher than .jw-modal-background */
+        z-index: 1000;
+
+        /* enables scrolling for tall modals */
+        overflow: auto;
+
+        .jw-modal-body {
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            max-width: 270px;
+        }
+    }
+
+    .jw-modal-background {
+        /* modal background fixed across whole screen */
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        /* semi-transparent black  */
+        background: rgba(0, 0, 0, 0.4);
+
+        /* z-index must be below .jw-modal and above everything else  */
+        z-index: 999;
+    }
+}
+
+body.jw-modal-open {
+    /* body overflow is hidden to hide main scrollbar when modal window is open */
+    overflow: hidden;
+}
+
+
+/* Screen Responsiveness */
+@include page-size-mixin.breakpoints(tablet) {
+
+}
+
+@include page-size-mixin.breakpoints(laptop) {
+  body {
+    font-size: 18px;
+  }
+
+  .jw-modal-body {
+    max-width: 500px;
+  }
+}
+
+@include page-size-mixin.breakpoints(desktop) {
+  body {
+    font-size: 20px;
+  }
+
+  .jw-modal-body {
+    max-width: 500px;
+  }
+}
+

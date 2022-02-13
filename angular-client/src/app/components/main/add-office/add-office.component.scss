@@ -1,0 +1,14 @@
+@use "../../../../assets/scss/theme";
+@use "../../../../assets/scss/page-size-mixin";
+
+.office-form {
+  padding: 10px;
+}
+
+/* Screen Responsiveness */
+@include page-size-mixin.breakpoints(tablet) {
+  .office-form {
+    border: var(--generic-border-color) solid 1px;
+    border-radius: 8px;
+  }
+}

@@ -1,0 +1,83 @@
+<app-navbar [label]="navLabel"></app-navbar>
+<form class="grid input-form office-form" [formGroup]="newOfficeForm" (ngSubmit)="updateOffice()">
+  <div class="form-group">
+    <input type="text" id="officeName" formControlName="officeName" name="officeName" placeholder="Office Name">
+    <div class="error-messages" *ngIf="officeName.touched">
+      <div *ngIf="officeName.invalid && officeName.dirty">* Office Name needs to be at least 3 characters</div>
+      <div *ngIf="officeName.value.length > 20 && officeName.dirty">* Office Name cannot exceed 20 characters</div>
+      <div *ngIf="!officeName.value">* Office Name is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" id="physicalAddress" formControlName="physicalAddress" name="physicalAddress" placeholder="Physical Address">
+    <div class="error-messages" *ngIf="physicalAddress.touched">
+      <div *ngIf="physicalAddress.invalid && physicalAddress.dirty">* Physical Address needs to be at least 3 characters</div>
+      <div *ngIf="physicalAddress.value.length > 100 && physicalAddress.dirty">* Physical Address cannot exceed 100 characters</div>
+      <div *ngIf="!physicalAddress.value">* Physical Address is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" id="email" formControlName="emailAddress" name="email" placeholder="Email Address">
+    <div class="error-messages" *ngIf="emailAddress.touched">
+      <div *ngIf="emailAddress.invalid && emailAddress.dirty">* Email Address needs to be in the form user@domain.com</div>
+      <div *ngIf="!emailAddress.value">* Email Address is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" id="phoneNumber" formControlName="phoneNumber" name="phoneNumber" placeholder="Phone Number">
+    <div class="error-messages" *ngIf="phoneNumber.touched">
+      <div *ngIf="(phoneNumber.invalid && phoneNumber.dirty) || phoneNumber.value.length < 10 ">* Phone Number needs to be at least 10 characters</div>
+      <div *ngIf="phoneNumber.value.length > 12 && phoneNumber.dirty">* Phone Number cannot exceed 12 characters</div>
+      <div *ngIf="!validateIfPhoneNumberIsNumeric(phoneNumber.value) && phoneNumber.dirty">* Phone Number can only be numbers, e.g 0123456789</div>
+      <div *ngIf="!phoneNumber.value">* Phone Number is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="number" id="maximumCapacity" formControlName="maximumCapacity" name="maximumCapacity" placeholder="Maximum Capacity">
+    <div class="error-messages" *ngIf="maximumCapacity.touched">
+      <div *ngIf="maximumCapacity.invalid && maximumCapacity.dirty">* Capacity needs to be at least 1</div>
+      <div *ngIf="!maximumCapacity.value">* Capacity is required</div>
+    </div>
+  </div>
+
+  <h2>Office Colour</h2>
+  <div class="form-group">
+    <div class="color-picker-row-1">
+      <div class="color" *ngFor="let color of listOfColorsToPickRow1; let i = index">
+        <input type="radio" formControlName="hexColor" name="hexColor" value="{{color}}"  id="color-{{i}}">
+        <label for="color-{{i}}">
+          <i class="fas fa-circle" id="color-picker-{{i}}"></i>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="color-picker-row-2">
+      <div class="color" *ngFor="let color of listOfColorsToPickRow2; let i = index">
+        <input type="radio" formControlName="hexColor" name="hexColor" value="{{color}}"  id="color-{{i + 6}}">
+        <label for="color-{{i + 6}}">
+          <i class="fas fa-circle" id="color-picker-{{i + 6}}"></i>
+        </label>
+      </div>
+    </div>
+    <div class="error-messages" *ngIf="hexColor.touched">
+      <div *ngIf="!hexColor.value">* Office Colour is required</div>
+    </div>
+  </div>
+
+  <button type="submit" class="generic-button">UPDATE OFFICE</button>
+  <button type="button" class="generic-button-inverted" (click)="openDeleteOption()">DELETE OFFICE</button>
+</form>
+
+<!--Delete-Staff-Member-Options-->
+<jw-modal id="delete-office-options">
+  <div class="modal-header-row grid">
+    <div class="back icon-1" (click)="modalService.close('delete-office-options')"><i class="fas fa-arrow-left"></i></div>
+    <h2 class="start-at-second-block-to-end">Are You Sure You Want To Delete {{officeObject.name}}?</h2>
+  </div>
+  <div class="modal-body grid">
+    <button class="delete-button" (click)="deleteOfficeFromHttpService()">DELETE OFFICE</button>
+    <button class="generic-button-inverted" (click)="modalService.close('delete-office-options')">KEEP OFFICE</button>
+  </div>
+</jw-modal>
