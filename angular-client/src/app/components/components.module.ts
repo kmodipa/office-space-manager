@@ -6,18 +6,23 @@ import {OfficeAccordionComponent} from "./shared/office-accordion/office-accordi
 import {AddOfficeComponent} from "./main/add-office/add-office.component";
 import {EditOfficeComponent} from "./main/edit-office/edit-office.component";
 import {ModalComponent} from "./shared/_modal/modal.component";
+import {OfficeComponent} from "./main/office/office.component";
+import { OfficeWorkerComponent } from './main/office-worker/office-worker.component';
 
 export const components = [
   HomeComponent,
   OfficeAccordionComponent,
   AddOfficeComponent,
   EditOfficeComponent,
-  ModalComponent
+  ModalComponent,
+  OfficeComponent,
+  OfficeWorkerComponent
 ]
 
 @NgModule({
   declarations: [
-    components
+    components,
+    OfficeWorkerComponent
   ],
   imports: [
     CommonModule,

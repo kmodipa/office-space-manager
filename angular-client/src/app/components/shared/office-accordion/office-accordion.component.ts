@@ -20,7 +20,7 @@ export class OfficeAccordionComponent implements OnInit {
               private officeWorkerHttpService: OfficeWorkerHttpService) { }
 
   ngOnInit(): void {
-    console.log(this.office);
+    console.log(this.office, this.index);
     this.getOfficeWorkersFromHttpService();
   }
 
