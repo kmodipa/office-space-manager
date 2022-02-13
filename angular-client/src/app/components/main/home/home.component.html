@@ -1,7 +1,10 @@
 <h1 class="header">All Offices</h1>
 
 <div class="offices">
-Office-Works
+  <app-office-accordion
+    *ngFor="let office of offices; let i = index "
+    [office]="office"
+    [index]="i"></app-office-accordion>
 </div>
 
 <button class="add-button-round" (click)="addNewOffice()">
