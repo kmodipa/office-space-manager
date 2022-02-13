@@ -1,0 +1,6 @@
+<nav class="grid">
+  <div class="back" (click)="back()" *ngIf="label == ' '"><i class="fas fa-arrow-left" style="color: white"></i></div>
+  <div class="back" (click)="back()" *ngIf="label != ' '"><i class="fas fa-arrow-left"></i></div>
+  <h1>{{label}}</h1>
+  <div class="login">Login</div>
+</nav>
