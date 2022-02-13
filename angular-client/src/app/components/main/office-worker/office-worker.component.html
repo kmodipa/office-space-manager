@@ -1,0 +1,137 @@
+<form class="grid office-workers-search">
+  <input type="text"
+         id="search"
+         placeholder="Search"
+         (input)="filterList()"
+         [(ngModel)]="searchString"
+         [ngModelOptions]="{standalone: true}">
+  <i class="fas fa-search"></i>
+</form>
+
+<div class="grid office-workers-header">
+  <h2>Staff Members in Office</h2>
+  <h3>{{officeWorkers.length}}</h3>
+</div>
+
+<div class="grid office-workers" *ngFor="let officeWorker of officeWorkers">
+  <img src="{{officeWorker.avatarUrl}}" alt="avatar" height="30px">
+  <div class="member-names">{{officeWorker.firstName}} {{officeWorker.lastName}}</div>
+  <div class="three-dots" (click)="openOfficeWorkerOptions(officeWorker)"><i class="fas fa-ellipsis-v"></i></div>
+</div>
+
+<button class="add-button-round" (click)="openEditOfficeWorkerModal(true)">
+  <img src="../../../../assets/svg/plus-white.svg" alt="add">
+</button>
+
+<!--Staff-Member-Options-->
+<jw-modal id="office-worker-options">
+  <div class="modal-body grid">
+    <button class="generic-button" (click)="openEditOfficeWorkerModal(false)">EDIT STAFF MEMBER</button>
+    <button class="generic-button-inverted" (click)="openDeleteOfficeWorkerModal()">DELETE STAFF MEMBER</button>
+  </div>
+</jw-modal>
+
+<!--Delete-Staff-Member-Options-->
+<jw-modal id="delete-office-worker-options">
+  <div class="modal-header-row grid">
+    <div class="back icon-1" (click)="back()"><i class="fas fa-arrow-left"></i></div>
+    <h2 class="start-at-second-block-to-end">Are You Sure You Want To Delete Staff Member?</h2>
+  </div>
+  <div class="modal-body grid">
+    <button class="delete-button" (click)="deleteOfficeWorkerFromHttpService()">DELETE STAFF MEMBER</button>
+    <button class="generic-button-inverted" (click)="modalService.close('delete-office-worker-options')">KEEP STAFF MEMBER</button>
+  </div>
+</jw-modal>
+
+<!-- Add-Edit-Staff-Member-Modal -->
+<jw-modal id="edit-office-worker-modal">
+  <div class="modal-header-row grid">
+    <div class="back icon-1" (click)="back()" *ngIf="nextFormSectionToggle"><i class="fas fa-arrow-left"></i></div>
+    <h2 class="start-at-second-block" *ngIf="!newWorker && nextFormSectionToggle">Edit Staff Member</h2>
+    <h2 class="start-at-first-block" *ngIf="!newWorker && !nextFormSectionToggle">Edit Staff Member</h2>
+    <h2 class="start-at-second-block" *ngIf="newWorker && nextFormSectionToggle">New Staff Member</h2>
+    <h2 class="start-at-first-block" *ngIf="newWorker && !nextFormSectionToggle">New Staff Member</h2>
+    <img src="../../../../assets/svg/cancel-close.svg"
+         class="icon-2"
+         alt="close-button"
+         (click)="modalService.close('edit-office-worker-modal')">
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="officeWorkerForm" class="grid input-form">
+      <div class="form-group" *ngIf="!nextFormSectionToggle">
+        <input type="text" id="firstName" formControlName="firstName" name="firstName" placeholder="First Name">
+        <div class="error-messages" *ngIf="firstName.touched">
+          <div *ngIf="firstName.invalid && firstName.dirty">* First Name needs to be at least 3 characters</div>
+          <div *ngIf="firstName.value.length > 20 && firstName.dirty">* First Name cannot exceed 20 characters</div>
+          <div *ngIf="!firstName.value">* First Name is required</div>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="!nextFormSectionToggle">
+        <input type="text" id="lastName" formControlName="lastName" name="lastName" placeholder="Last Name">
+        <div class="error-messages" *ngIf="lastName.touched">
+          <div *ngIf="lastName.invalid && lastName.dirty">* Last Name needs to be at least 3 characters</div>
+          <div *ngIf="lastName.value.length > 20 && lastName.dirty">* Last Name cannot exceed 20 characters</div>
+          <div *ngIf="!lastName.value">* Last Name is required</div>
+        </div>
+      </div>
+
+      <h2 *ngIf="nextFormSectionToggle">Avatar</h2>
+      <div class="form-group" *ngIf="nextFormSectionToggle">
+        <div class="color-picker-row-1">
+          <div class="color" *ngFor="let avatar of listOfAvatarsRow1; let i = index">
+            <input type="radio" formControlName="avatarUrl" name="avatarUrl" value="{{avatar}}"  id="avatar-{{i}}">
+            <label for="avatar-{{i}}">
+              <img src="{{avatar}}" alt="">
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="nextFormSectionToggle">
+        <div class="color-picker-row-2">
+          <div class="color" *ngFor="let avatar of listOfAvatarsRow2; let i = index">
+            <input type="radio" formControlName="avatarUrl" name="avatarUrl" value="{{avatar}}"  id="avatar-{{i + 5}}">
+            <label for="avatar-{{i + 5}}">
+              <img src="{{avatar}}" alt="">
+            </label>
+          </div>
+        </div>
+        <div class="error-messages" *ngIf="avatarUrl.touched">
+          <div *ngIf="!avatarUrl.value">* Avatar is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-nav">
+          <div class="color">
+            <input type="radio"
+                   [(ngModel)]="nextFormSectionToggle"
+                   [ngModelOptions]="{standalone: true}"
+                   name="nav"
+                   [value]="false"
+                   id="nav-1">
+            <label for="nav-1">
+              <i class="fas fa-circle nav"></i>
+            </label>
+          </div>
+          &nbsp;
+          <div class="color">
+            <input type="radio"
+                   [(ngModel)]="nextFormSectionToggle"
+                   [ngModelOptions]="{standalone: true}"
+                   name="nav"
+                   [value]="true"
+                   id="nav-2">
+            <label for="nav-2">
+              <i class="fas fa-circle nav"></i>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="generic-button" (click)="next()" *ngIf="!nextFormSectionToggle">NEXT</button>
+      <button type="button" class="generic-button" *ngIf="nextFormSectionToggle && newWorker" (click)="addNewOfficeWorker()">ADD STAFF MEMBER</button>
+      <button type="button" class="generic-button" *ngIf="nextFormSectionToggle && !newWorker" (click)="editOfficeWorker()">UPDATE STAFF MEMBER</button>
+    </form>
+  </div>
+</jw-modal>
