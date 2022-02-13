@@ -1,0 +1,28 @@
+@use "../../../../assets/scss/theme";
+
+nav {
+  margin: 40px auto;
+  padding: 0 20px;
+  max-width: 1140px;
+
+  .back {
+    grid-column: 1/2;
+    grid-row: 1;
+    cursor: pointer;
+  }
+
+  .login {
+    grid-column: 8/9;
+    grid-row: 1;
+    cursor: pointer;
+    text-align: end;
+  }
+
+  h1 {
+    grid-column: 2/8;
+    grid-row: 1;
+    text-align: center;
+    font-weight: 500;
+    font-size: 25px;
+  }
+}

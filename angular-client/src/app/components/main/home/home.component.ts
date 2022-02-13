@@ -11,6 +11,7 @@ import {OfficeHttpService} from "../../../services/http/office-service/office.se
 export class HomeComponent implements OnInit {
 
   offices: OfficeModel[];
+  navLabel = " ";
 
   constructor(private router: Router,
               private officeHttpService: OfficeHttpService) {

@@ -8,6 +8,7 @@ import {EditOfficeComponent} from "./main/edit-office/edit-office.component";
 import {ModalComponent} from "./shared/_modal/modal.component";
 import {OfficeComponent} from "./main/office/office.component";
 import { OfficeWorkerComponent } from './main/office-worker/office-worker.component';
+import {NavbarComponent} from "./shared/navbar/navbar.component";
 
 export const components = [
   HomeComponent,
@@ -16,7 +17,8 @@ export const components = [
   EditOfficeComponent,
   ModalComponent,
   OfficeComponent,
-  OfficeWorkerComponent
+  OfficeWorkerComponent,
+  NavbarComponent
 ]
 
 @NgModule({
