@@ -1,0 +1,17 @@
+/* Breakpoints */
+
+@mixin breakpoints($points) {
+
+  /* Small Tablet Styles */
+  @if $points == tablet {
+    @media screen and(min-width: 620px)  { @content; }
+  }
+  /* Large Tablet and Laptop Styles */
+  @else if $points == laptop {
+    @media screen and(min-width: 960px)  { @content; }
+  }
+  /* Desktop Styles */
+  @else if $points == desktop {
+    @media screen and(min-width: 1200px) { @content; }
+  }
+}
