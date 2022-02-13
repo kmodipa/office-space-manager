@@ -17,6 +17,18 @@ import {
     getOfficeHandler, getOfficesHandler,
     updateOfficeHandler
 } from "./controllers/office.controller";
+import {
+    createOfficeWorkerSchema,
+    deleteOfficeWorkerSchema,
+    getOfficeWorkerSchema,
+    updateOfficeWorkerSchema
+} from "./schemas/officeWorker.schema";
+import {
+    createOfficeWorkerHandler,
+    deleteOfficeWorkerHandler,
+    getOfficeWorkerHandler,
+    getOfficeWorkersHandler, updateOfficeWorkerHandler
+} from "./controllers/officeWorker.controller";
 
 function routes(app: Express) {
     app.get("/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
@@ -58,9 +70,42 @@ function routes(app: Express) {
     );
 
     app.delete(
-        "/api/offices/:officeId",
+        "/api/office/:officeId",
         [requireUser, validateResource(deleteOfficeSchema)],
         deleteOfficeHandler
+    );
+
+
+    /* OfficeWorker EndPoints
+    * */
+    app.post(
+        "/api/officeWorkers",
+        [requireUser, validateResource(createOfficeWorkerSchema)],
+        createOfficeWorkerHandler
+    );
+
+    app.put(
+        "/api/officeWorker/:officeWorkerId",
+        [requireUser, validateResource(updateOfficeWorkerSchema)],
+        updateOfficeWorkerHandler
+    );
+
+    app.get(
+        "/api/officeWorker/:officeWorkerId",
+        validateResource(getOfficeWorkerSchema),
+        getOfficeWorkerHandler
+    );
+
+    app.get(
+        "/api/officeWorkers/:officeId",
+        requireUser,
+        getOfficeWorkersHandler
+    );
+
+    app.delete(
+        "/api/officeWorker/:officeWorkerId/:officeId",
+        [requireUser, validateResource(deleteOfficeWorkerSchema)],
+        deleteOfficeWorkerHandler
     );
 }
 
