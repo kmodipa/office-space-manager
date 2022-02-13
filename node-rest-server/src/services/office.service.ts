@@ -1,7 +1,5 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
 import OfficeModel, {OfficeDocument, OfficeInput} from "../models/office.model";
-import {createOfficeSchema} from "../schemas/Office.schema";
-import SessionModel, {SessionDocument} from "../models/session.model";
 
 
 export async function createOffice(input: OfficeInput) {
@@ -25,8 +23,8 @@ export async function findOffice(
     }
 }
 
-export async function findOffices(query: FilterQuery<OfficeDocument>) {
-    return OfficeModel.find(query).lean();
+export async function findOffices() {
+    return OfficeModel.find({}).lean();
 }
 
 export async function findAndUpdateOffice(

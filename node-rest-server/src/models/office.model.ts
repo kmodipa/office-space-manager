@@ -5,7 +5,7 @@ import { UserDocument } from "./user.model";
 const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10);
 
 export interface OfficeInput {
-    userid: UserDocument["_id"];
+    user: UserDocument["_id"];
     name: string;
     hexcolor: string;
     email: string;

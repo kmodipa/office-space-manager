@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import {
-    CreateOfficeInput,
-    UpdateOfficeInput
+    CreateOfficeInput, DeleteOfficeInput, ReadOfficeInput, UpdateOfficeInput
 } from "../schemas/Office.schema";
 import {
     createOffice,
@@ -9,7 +8,6 @@ import {
     findAndUpdateOffice,
     findOffice, findOffices,
 } from "../services/office.service";
-import {findSessions} from "../services/session.service";
 
 export async function createOfficeHandler(
     req: Request<{}, {}, CreateOfficeInput["body"]>,
@@ -19,9 +17,9 @@ export async function createOfficeHandler(
 
     const body = req.body;
 
-    const product = await createOffice({ ...body, userid: userId });
+    const office = await createOffice({ ...body, user: userId });
 
-    return res.send(product);
+    return res.send(office);
 }
 
 export async function updateOfficeHandler(
@@ -39,7 +37,7 @@ export async function updateOfficeHandler(
         return res.sendStatus(404);
     }
 
-    if (String(office.userid) !== userId) {
+    if (String(office.user) !== userId) {
         return res.sendStatus(403);
     }
 
@@ -51,11 +49,11 @@ export async function updateOfficeHandler(
 }
 
 export async function getOfficeHandler(
-    req: Request<UpdateOfficeInput["params"]>,
+    req: Request<ReadOfficeInput["params"]>,
     res: Response
 ) {
     const officeId = req.params.officeId;
-    const office = await findOffice({ productId: officeId });
+    const office = await findOffice({ officeId: officeId });
 
     if (!office) {
         return res.sendStatus(404);
@@ -66,18 +64,17 @@ export async function getOfficeHandler(
 
 export async function getOfficesHandler(
     req: Request,
-    res: Response
+    res: Response,
 ) {
-    const userId = res.locals.user._id;
 
-    const offices = await findOffices({ user: userId});
+    const offices = await findOffices();
 
     return res.send(offices);
 }
 
 
 export async function deleteOfficeHandler(
-    req: Request<UpdateOfficeInput["params"]>,
+    req: Request<DeleteOfficeInput["params"]>,
     res: Response
 ) {
     const userId = res.locals.user._id;
@@ -87,10 +84,6 @@ export async function deleteOfficeHandler(
 
     if (!office) {
         return res.sendStatus(404);
-    }
-
-    if (String(office.userid) !== userId) {
-        return res.sendStatus(403);
     }
 
     await deleteOffice({ officeId: officeId });
