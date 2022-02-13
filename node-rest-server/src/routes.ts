@@ -43,22 +43,23 @@ function routes(app: Express) {
 
     app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
+
     /* Office EndPoints
     * */
     app.post(
-        "/api/offices",
+        "/api/office",
         [requireUser, validateResource(createOfficeSchema)],
         createOfficeHandler
     );
 
     app.put(
-        "/api/offices/:officeId",
+        "/api/office/:officeId",
         [requireUser, validateResource(updateOfficeSchema)],
         updateOfficeHandler
     );
 
     app.get(
-        "/api/offices/:officeId",
+        "/api/office/:officeId",
         validateResource(getOfficeSchema),
         getOfficeHandler
     );
