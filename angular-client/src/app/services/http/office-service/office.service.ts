@@ -18,8 +18,8 @@ export class OfficeHttpService {
   }
 
   GetById(id: string): Observable<OfficeModel> {
-    return this.httpClient.get<OfficeModel>(`${this.baseUrl}/offices?_id=${id}`);
-    // return this.httpClient.get<OfficeModel>(`${this.baseUrl}/office?_id=${id}`);
+    // return this.httpClient.get<OfficeModel>(`${this.baseUrl}/offices?_id=${id}`);
+    return this.httpClient.get<OfficeModel>(`${this.baseUrl}/office?_id=${id}`);
   }
 
   Upsert(model: OfficeModel): Observable<OfficeModel> {
