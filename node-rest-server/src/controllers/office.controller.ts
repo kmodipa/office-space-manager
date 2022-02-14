@@ -37,9 +37,9 @@ export async function updateOfficeHandler(
         return res.sendStatus(404);
     }
 
-    if (String(office.user) !== userId) {
-        return res.sendStatus(403);
-    }
+    // if (String(office.user) !== userId) {
+    //     return res.sendStatus(403);
+    // }
 
     const updatedOffice = await findAndUpdateOffice({ officeId: officeId }, update, {
         new: true,
@@ -86,7 +86,8 @@ export async function deleteOfficeHandler(
         return res.sendStatus(404);
     }
 
-    await deleteOffice({ officeId: officeId });
+    const result = await deleteOffice({ officeId: officeId });
 
-    return res.sendStatus(200);
+    // return res.sendStatus(200);
+    return res.send(result);
 }

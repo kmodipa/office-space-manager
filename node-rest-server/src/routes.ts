@@ -66,7 +66,6 @@ function routes(app: Express) {
 
     app.get(
         "/api/offices",
-        requireUser,
         getOfficesHandler
     );
 
@@ -99,12 +98,11 @@ function routes(app: Express) {
 
     app.get(
         "/api/officeWorkers/:officeId",
-        requireUser,
         getOfficeWorkersHandler
     );
 
     app.delete(
-        "/api/officeWorker/:officeWorkerId/:officeId",
+        "/api/officeWorker/:officeWorkerId",
         [requireUser, validateResource(deleteOfficeWorkerSchema)],
         deleteOfficeWorkerHandler
     );

@@ -81,7 +81,6 @@ export async function deleteOfficeWorkerHandler(
     res: Response
 ) {
     const officeWorkerId = req.params.officeWorkerId;
-    const officeId = req.params.officeId;
     console.log(officeWorkerId);
     const officeWorker = await findOfficeWorker({ officeWorkerId: officeWorkerId });
     console.log(officeWorker);
@@ -89,11 +88,10 @@ export async function deleteOfficeWorkerHandler(
         return res.sendStatus(404);
     }
 
-    if (String(officeWorker.officeId) !== officeId) {
-        return res.sendStatus(403);
-    }
+    const result = await deleteOfficeWorker({ officeWorkerId: officeWorkerId });
 
-    await deleteOfficeWorker({ officeWorkerId: officeWorkerId });
+    console.log(result);
 
-    return res.sendStatus(200);
+    // return res.sendStatus(200);
+    return res.send(result);
 }
