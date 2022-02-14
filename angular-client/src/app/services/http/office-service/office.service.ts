@@ -19,19 +19,19 @@ export class OfficeHttpService {
 
   GetById(id: string): Observable<OfficeModel> {
     // return this.httpClient.get<OfficeModel>(`${this.baseUrl}/offices?_id=${id}`);
-    return this.httpClient.get<OfficeModel>(`${this.baseUrl}/office?_id=${id}`);
+    return this.httpClient.get<OfficeModel>(`${this.baseUrl}/office/${id}`);
   }
 
   Upsert(model: OfficeModel): Observable<OfficeModel> {
     console.log(model);
-    return this.httpClient.post<OfficeModel>(`${this.baseUrl}/offices`, model);
+    return this.httpClient.post<OfficeModel>(`${this.baseUrl}/office`, model);
   }
 
   Update(model: OfficeModel): Observable<string> {
-    return this.httpClient.post<string>(`${this.baseUrl}/offices?officeId=` + model._id, model);
+    return this.httpClient.put<string>(`${this.baseUrl}/office/` + model.officeId, model);
   }
 
-  Delete(id: string): Observable<string> {
-    return this.httpClient.get<string>(`${this.baseUrl}/offiece?id=${id}`);
+  Delete(id: string): Observable<any> {
+    return this.httpClient.delete<any>(`${this.baseUrl}/office/${id}`);
   }
 }

@@ -46,7 +46,6 @@ export class AddOfficeComponent implements OnInit {
     if (this.newOfficeForm.valid) {
       console.log('pass');
       const office: OfficeModel = <OfficeModel>{
-        _id: "office_wiuyuiwe",
         email: this.emailAddress.value,
         hexcolor: this.hexColor.value,
         capacity: this.maximumCapacity.value,
@@ -73,7 +72,7 @@ export class AddOfficeComponent implements OnInit {
     this.newOfficeForm = this.formBuilder.group({
       officeName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       physicalAddress: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      emailAddress: ['',         [Validators.required,
+      emailAddress: ['', [Validators.required,
         Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
       phoneNumber: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
       maximumCapacity: ['', [Validators.required, Validators.min(1)]],

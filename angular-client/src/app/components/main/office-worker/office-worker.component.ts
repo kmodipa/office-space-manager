@@ -42,7 +42,7 @@ export class OfficeWorkerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getOfficeWorkerFromHttpService();
+    this.getOfficeWorkersFromHttpService();
     this.initiateForm();
   }
 
@@ -61,51 +61,56 @@ export class OfficeWorkerComponent implements OnInit {
           officeId: this.office.officeId
         }
 
-        this.officeWorkerHttpService.Update(officeWorker).subscribe( worker => {
+        this.officeWorkerHttpService.Upsert(officeWorker).subscribe( worker => {
           if (worker) {
             this.toastrService.success( this.firstName.value + ' added to ' + this.office.name + ' office');
             this.modalService.close('edit-office-worker-modal');
+            this.getOfficeWorkersFromHttpService();
           }
         });
       }
     }
   }
 
-  editOfficeWorker(): void {
+  updateOfficeWorker(): void {
     this.markFormFieldsAsTouched();
     if (this.officeWorkerForm.valid) {
       const workerModel: OfficeWorkerModel = <OfficeWorkerModel>{
         avatarUrl: this.avatarUrl.value,
         firstName: this.firstName.value,
         lastName: this.lastName.value,
-        officeId: this.office.officeId
+        officeId: this.office.officeId,
+        officeWorkerId: this.currentOfficeWorker.officeWorkerId
       }
 
+      console.log(workerModel);
       this.officeWorkerHttpService.Update(workerModel).subscribe( worker => {
         console.log(worker);
         if (worker) {
           this.toastrService.success( 'Staff Member updated');
           this.modalService.close('edit-office-worker-modal');
+          this.getOfficeWorkersFromHttpService();
         }
       });
     }
   }
 
-  getOfficeWorkerFromHttpService(): void {
+  getOfficeWorkersFromHttpService(): void {
     console.log(this.office);
-    this.officeWorkerHttpService.GetAll(this.office._id).subscribe( workers => {
+    this.officeWorkerHttpService.GetAll(this.office.officeId).subscribe( workers => {
       this.officeWorkers = workers;
       console.log(workers);
     });
   }
 
   deleteOfficeWorkerFromHttpService(): void {
-    const officeWorkerId = <string>this.currentOfficeWorker._id;
+    const officeWorkerId = <string>this.currentOfficeWorker.officeWorkerId;
     this.officeWorkerHttpService.Delete(officeWorkerId).subscribe( response => {
       console.log(response);
       if (response) {
         this.toastrService.success( 'Staff Member removed');
         this.modalService.close('delete-office-worker-options');
+        this.getOfficeWorkersFromHttpService();
       }
     });
   }
@@ -135,7 +140,7 @@ export class OfficeWorkerComponent implements OnInit {
         return result;
       });
     } else {
-      this.getOfficeWorkerFromHttpService();
+      this.getOfficeWorkersFromHttpService();
     }
   }
 

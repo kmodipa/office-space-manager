@@ -35,14 +35,7 @@ export const updateOfficeWorkerSchema = object({
 });
 
 export const deleteOfficeWorkerSchema = object({
-    params: object({
-        officeWorkerId: string({
-            required_error: "officeWorkerId is required",
-        }),
-        officeId: string({
-            required_error: "officeId is required",
-        })
-    })
+    ...params
 });
 
 export const getOfficeWorkerSchema = object({

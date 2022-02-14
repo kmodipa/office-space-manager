@@ -1,0 +1,22 @@
+<app-navbar [label]="navLabel"></app-navbar>
+<form class="grid input-form office-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+  <div class="form-group">
+    <input type="text" id="email" formControlName="email" name="email" placeholder="Email">
+    <div class="error-messages" *ngIf="email.touched">
+      <div *ngIf="email.invalid && email.dirty">* Email Address needs to be in the form user@domain.com</div>
+      <div *ngIf="!email.value">* Email is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="password" id="password" formControlName="password" name="password" placeholder="Password">
+    <div class="error-messages" *ngIf="password.touched">
+      <div *ngIf="password.invalid && password.dirty">* Password needs to be at least 3 characters</div>
+      <div *ngIf="!password.value">* Password is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <p>don't have an account? <a (click)="goToSignUp()">Register</a></p>
+  </div>
+
+  <button type="submit" class="generic-button">LOGIN</button>
+</form>

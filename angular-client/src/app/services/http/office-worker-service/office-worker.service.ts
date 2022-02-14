@@ -14,11 +14,11 @@ export class OfficeWorkerHttpService {
   }
 
   GetAll(officeId: string): Observable<OfficeWorkerModel[]> {
-    return this.httpClient.get<OfficeWorkerModel[]>(`${this.baseUrl}/officeWorkers?officeId=${officeId}`);
+    return this.httpClient.get<OfficeWorkerModel[]>(`${this.baseUrl}/officeWorkers/${officeId}`);
   }
 
   GetById(officeWorkerId: string): Observable<OfficeWorkerModel> {
-    return this.httpClient.get<OfficeWorkerModel>(`${this.baseUrl}/officeWorkers?_id=${officeWorkerId}`);
+    return this.httpClient.get<OfficeWorkerModel>(`${this.baseUrl}/officeWorker/${officeWorkerId}`);
   }
 
   Upsert(model: OfficeWorkerModel): Observable<OfficeWorkerModel> {
@@ -26,10 +26,10 @@ export class OfficeWorkerHttpService {
   }
 
   Update(model: OfficeWorkerModel): Observable<string> {
-    return this.httpClient.post<string>(`${this.baseUrl}/officeWorkers?_id=${model._id}`, model);
+    return this.httpClient.put<string>(`${this.baseUrl}/officeWorker/${model.officeWorkerId}`, model);
   }
 
   Delete(id: string): Observable<string> {
-    return this.httpClient.get<string>(`${this.baseUrl}/offieceWorkers?id=${id}`);
+    return this.httpClient.delete<string>(`${this.baseUrl}/officeWorker/${id}`);
   }
 }

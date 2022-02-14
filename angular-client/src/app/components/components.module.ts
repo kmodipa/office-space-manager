@@ -9,6 +9,8 @@ import {ModalComponent} from "./shared/_modal/modal.component";
 import {OfficeComponent} from "./main/office/office.component";
 import { OfficeWorkerComponent } from './main/office-worker/office-worker.component';
 import {NavbarComponent} from "./shared/navbar/navbar.component";
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 export const components = [
   HomeComponent,
@@ -18,13 +20,17 @@ export const components = [
   ModalComponent,
   OfficeComponent,
   OfficeWorkerComponent,
-  NavbarComponent
+  NavbarComponent,
+  LoginComponent,
+  SignupComponent
 ]
 
 @NgModule({
   declarations: [
     components,
-    OfficeWorkerComponent
+    OfficeWorkerComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     CommonModule,

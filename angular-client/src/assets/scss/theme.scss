@@ -64,7 +64,7 @@
     grid-column: 1/9;
     box-sizing: border-box;
 
-    input[type="text"], input[type="number"] {
+    input[type="text"], input[type="number"], input[type="password"] {
       box-sizing: border-box;
       width: 100%;
       border: var(--generic-border-color) solid 1px;
@@ -74,6 +74,16 @@
       padding: 5px 10px;
       color: var(--default-text-color);
       outline: none;
+    }
+
+    p {
+      margin: 10px auto;
+      text-align: center;
+      ont-size: 12px;
+      a {
+        color: var(--secondary);
+        cursor: pointer;
+      }
     }
   }
 
