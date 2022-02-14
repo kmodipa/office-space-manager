@@ -61,7 +61,7 @@ export class EditOfficeComponent implements OnInit {
     this.markFormFieldsAsTouched();
     if (this.newOfficeForm.valid) {
       const office: OfficeModel = <OfficeModel>{
-        _id: this.officeId,
+        officeId: this.officeId,
         email: this.emailAddress.value,
         hexcolor: this.hexColor.value,
         capacity: this.maximumCapacity.value,
@@ -85,7 +85,7 @@ export class EditOfficeComponent implements OnInit {
       console.log(this.officeId);
       this.officeHttpService.Delete(this.officeId).subscribe( response => {
         console.log(response);
-        if (response == 'Ok') {
+        if (response) {
           this.toastrService.success( this.officeName.value + ' Deleted');
           this.returnHome();
         }
