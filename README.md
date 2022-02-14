@@ -18,7 +18,6 @@ The system must allow users to create and manage office space. The home page mus
 
 ## What you need for you to be able to run the project locally.
 
-* Typescript
 * Angular-cli
 * Node runtime
 * Git (for pulling the code down to your local machine)
@@ -28,7 +27,7 @@ The system must allow users to create and manage office space. The home page mus
 - Firstly you will need to clone the project :point_right: copy and paste `git clone https://github.com/kmodipa/office-space-manager.git`.
 - Secondly open your terminal/cmd and navigate to the root of the project and you should be able to see two folders/directories `angular-client` and `node-rest-server`.
 - Thirdly navigate into each folder/directory/respective and run the command `npm install` to install the packages 📦  that are required to run the applications.
-- and then run `ng serve --port 4200` in the root directory of `angular-client` to launch the application and also run `npm run dev` in the root directory of `node-rest-server` tp run the application.
+- and then run `ng serve --port 4200` in the root directory of `angular-client` to launch the application and also run `npm run dev` in the root directory of `node-rest-server` t0 run the application.
 - Now open your browser and go to `http://localhost:4200/` to view.
 - That's all :slightly_smiling_face:.
 
