@@ -11,6 +11,12 @@ const port = config.get<number>('port');
 
 const app = express();
 
+const cors = require('cors');
+
+app.use(cors({
+    origin: '*'
+}));
+
 app.use(express.json());
 
 app.use(deserializeUser);
