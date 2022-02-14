@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import UserModel from "../../../core/models/user-model";
+import {HttpResponse} from "@angular/common/http";
+import {AuthService} from "../../../services/http/auth-service/auth.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-signup',
@@ -13,14 +17,30 @@ export class SignupComponent implements OnInit {
   signUpForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private  authSrevice: AuthService,
+              private toasterService: ToastrService) { }
 
   ngOnInit(): void {
     this.initiateForm();
   }
 
   signUp(): void {
+    this.markFormFieldsAsTouched();
+    if (this.signUpForm.valid) {
+      let userModel = <UserModel>{
+        name: this.name.value,
+        email: this.email.value,
+        password: this.password.value,
+        passwordConfirmation: this.password.value
+      }
 
+      this.authSrevice.SignUp(userModel).subscribe( (res: HttpResponse<any>) => {
+        console.log(res);
+        this.router.navigate(['login']);
+        this.toasterService.success('Account Created');
+      });
+    }
   }
 
   /*-- Helper Methods --*/

@@ -1,5 +1,5 @@
 <app-navbar [label]="navLabel"></app-navbar>
-<form class="grid input-form office-form" [formGroup]="loginForm" (click)="getUserSession()">
+<form class="grid input-form office-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
   <div class="form-group">
     <input type="text" id="email" formControlName="email" name="email" placeholder="Email">
     <div class="error-messages" *ngIf="email.touched">

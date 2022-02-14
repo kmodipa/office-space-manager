@@ -1,5 +1,5 @@
 <app-navbar [label]="navLabel"></app-navbar>
-<form class="grid input-form office-form" [formGroup]="signUpForm" (click)="signUp()">
+<form class="grid input-form office-form" [formGroup]="signUpForm" (ngSubmit)="signUp()">
   <div class="form-group">
     <input type="text" id="name" formControlName="name" name="name" placeholder="Name">
     <div class="error-messages" *ngIf="name.touched">
