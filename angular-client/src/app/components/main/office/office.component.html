@@ -1,7 +1,7 @@
 <app-navbar [label]="navLabel"></app-navbar>
 <div class="grid office-layout">
-  <app-office-accordion [office]="officeObject"></app-office-accordion>
-  <app-office-worker [office]="officeObject" ></app-office-worker>
+  <app-office-accordion *ngIf="officeObject.name.length > 0" [office]="officeObject"></app-office-accordion>
+  <app-office-worker *ngIf="officeObject.name.length > 0" [office]="officeObject" ></app-office-worker>
 </div>
 
 

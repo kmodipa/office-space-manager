@@ -36,7 +36,7 @@ export class OfficeAccordionComponent implements OnInit {
   }
 
   getOfficeWorkersFromHttpService(): void {
-    this.officeWorkerHttpService.GetAll(this.office._id).subscribe(officeWorker => {
+    this.officeWorkerHttpService.GetAll(this.office.officeId).subscribe(officeWorker => {
       this.staffMembersCount = officeWorker.filter(worker => worker.officeId === this.office.officeId).length;
       this.buildStaffMemberCountString();
     });
