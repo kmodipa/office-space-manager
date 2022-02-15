@@ -5,7 +5,17 @@ const privateKey = config.get<string>("accessTokenPrivateKey");
 const publicKey = config.get<string>("accessTokenPublicKey");
 
 export function signJwt( object: Object, options?: jwt.SignOptions | undefined) {
-    return jwt.sign(object, privateKey, {...(options && options), algorithm: "RS256"});
+    // return jwt.sign(object, privateKey, {...(options && options), algorithm: "RS256"});
+    try {
+        return jwt.sign(object, privateKey);
+    } catch(e: any) {
+        return {
+            valid: false,
+            expired: "signJwt " + e.message,
+            decoded: null
+        };
+    }
+
 }
 
 export function verifyJwt(token: string) {
@@ -17,10 +27,9 @@ export function verifyJwt(token: string) {
             decoded
         };
     } catch (e: any) {
-        console.error(e);
         return {
             valid: false,
-            expired: e.message === "jwt expired",
+            expired: "verifyTwt " + e.message,
             decoded: null
         };
     }
