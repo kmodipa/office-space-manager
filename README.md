@@ -32,4 +32,4 @@ The system must allow users to create and manage office space. The home page mus
 - That's all :slightly_smiling_face:.
 
 ## Is the Application hosted live?
-Coming Soon...
+Yes and you can access it here :point_right: [https://office-space-manager.web.app/](https://office-space-manager.web.app/)
